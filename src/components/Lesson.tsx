@@ -19,10 +19,15 @@ export function Lesson(props: LessonProps){
         locale: ptBR,
     })
 
-    const isActiveLesson = slug == props.slug;
+    const isActiveLesson = slug === props.slug;
 
     return (
-        <Link to={`/event/lesson/${props.slug}`} className="group">
+        <Link 
+            to={`${isLessonAvailable ? `/event/lesson/${props.slug}` : ''} `} 
+            className={classNames("group", {
+                'cursor-not-allowed opacity-50' : !isLessonAvailable,
+            })}
+        >
             <span className="text-gray-300">
                 {availableDateFormatted}
             </span>
